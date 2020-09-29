@@ -16,6 +16,12 @@ public class UserValidation {
 			return matches;
 		}
 		
+		public boolean validateEmail(String email) {
+			String patternString = "^[a-zA-z]{1}([.]{0,1}[a-zA-z0-9+-]{1,}){0,}[@]{1}[a-zA-Z0-9]{1,}[.]{1}[a-z]{2,3}([.]{1}[a-z]{2}){0,1}$";
+			boolean emailMatches = regexMatch(email, patternString);
+			return emailMatches;
+		}
+		
 		public static boolean regexMatch(String matchContent, String patternString) {  	
 			Pattern pattern = Pattern.compile(patternString);
 		    Matcher matcher = pattern.matcher(matchContent);

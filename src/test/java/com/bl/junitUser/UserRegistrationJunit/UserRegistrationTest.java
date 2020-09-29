@@ -22,6 +22,8 @@ public class UserRegistrationTest
         boolean welcome = userRegister.printWelcome();
         Assert.assertEquals(true, welcome);
     }
+    
+//    test cases for validating first name
     @Test
     public void firstName_whenValid_returnValid() {
     	boolean firstName = userRegister.validateName("Jagriti");
@@ -32,6 +34,8 @@ public class UserRegistrationTest
     	boolean firstName = userRegister.validateName("qwer");
         Assert.assertEquals(false, firstName);
     } 
+    
+//  test cases for validating last name
     @Test
     public void lastName_whenValid_returnValid() {
     	boolean lastName = userRegister.validateName("Agni");
@@ -42,4 +46,18 @@ public class UserRegistrationTest
     	boolean lastName = userRegister.validateName("one");
         Assert.assertEquals(false, lastName);
     } 
+    
+// test cases for validating emails
+    @Test
+    public void email_whenValid_returnValid() {
+    	boolean email = userRegister.validateEmail("abc.xyz@bl.co.in");
+        Assert.assertEquals(true, email);
+    } 
+    @Test
+    public void email_whenInValid_returnInValid() {
+    	boolean email = userRegister.validateEmail("abcbl.co.in");
+        Assert.assertEquals(false, email);
+    } 
+ 
+    
 }
