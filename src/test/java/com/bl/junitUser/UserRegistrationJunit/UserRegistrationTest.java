@@ -83,8 +83,13 @@ public class UserRegistrationTest
     	Assert.assertEquals(true, passCheck);
     }
     @Test
-    public void password_whenLengthNotEight_returnInValid() {
+    public void password_whenLengthMoreThanEight_returnValid() {
     	boolean passCheck = userRegister.validatePhoneRule1("abc#$79*uigh");
+    	Assert.assertEquals(true, passCheck);
+    }
+    @Test
+    public void password_whenLengthLessThanEight_returnInValid() {
+    	boolean passCheck = userRegister.validatePhoneRule1("abc#$");
     	Assert.assertEquals(false, passCheck);
     }
     
