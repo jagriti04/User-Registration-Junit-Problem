@@ -78,12 +78,12 @@ public class UserRegistrationTest
     
  // test cases to check if password is valid (more than 8 char and atleast one upper case)
     @Test
-    public void password_whenLengthEightAUpperCase_returnValid() {
+    public void password_whenLengthEightAUpperCaseANumber_returnValid() {
     	boolean passCheck = userRegister.validatePhoneRule1("78B9*uigh");
     	Assert.assertEquals(true, passCheck);
     }
     @Test
-    public void password_whenLengthEightNoUpperCase_returnInValid() {
+    public void password_whenNoUpperCase_returnInValid() {
     	boolean passCheck = userRegister.validatePhoneRule1("789*uigh");
     	Assert.assertEquals(false, passCheck);
     }
@@ -95,6 +95,11 @@ public class UserRegistrationTest
     @Test
     public void password_whenLengthLessThanEight_returnInValid() {
     	boolean passCheck = userRegister.validatePhoneRule1("abc#$");
+    	Assert.assertEquals(false, passCheck);
+    }
+    @Test
+    public void password_whenNoNumber_returnInValid() {
+    	boolean passCheck = userRegister.validatePhoneRule1("Hello@hii");
     	Assert.assertEquals(false, passCheck);
     }
     
