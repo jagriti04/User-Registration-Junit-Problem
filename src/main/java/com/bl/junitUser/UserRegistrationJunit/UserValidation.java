@@ -29,7 +29,7 @@ public class UserValidation {
 		}
 
 		public boolean validatePhoneRule1(String password) {
-			String patternString = "^.{8,}$";
+			String patternString = "^(?=.*[A-Z]).{8,}$";
 			boolean passMatches = regexMatch(password, patternString);
 			return passMatches;
 		}
