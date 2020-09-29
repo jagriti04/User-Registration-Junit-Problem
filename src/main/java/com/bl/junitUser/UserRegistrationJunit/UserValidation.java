@@ -27,6 +27,12 @@ public class UserValidation {
 			boolean phoneMatches = regexMatch(mobileNum, patternString);
 			return phoneMatches;
 		}
+
+		public boolean validatePhoneRule1(String password) {
+			String patternString = "^.{8,}$";
+			boolean passMatches = regexMatch(password, patternString);
+			return passMatches;
+		}
 		
 		public static boolean regexMatch(String matchContent, String patternString) {  	
 			Pattern pattern = Pattern.compile(patternString);
@@ -35,4 +41,5 @@ public class UserValidation {
 			System.out.println(matchContent+" is " + isMatch);
 			return isMatch;
 		}
+
 }
