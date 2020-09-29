@@ -9,7 +9,7 @@ public class UserValidation {
 			System.out.println("Welcome to the user validation system");
 			return true;
 		}
-		
+		// same function for first and last name validation
 		public boolean validateName(String name) {
 			String patternString = "(^[A-Z])[A-Za-z]{2,}$";
 			boolean matches = regexMatch(name, patternString);
@@ -20,7 +20,7 @@ public class UserValidation {
 			Pattern pattern = Pattern.compile(patternString);
 		    Matcher matcher = pattern.matcher(matchContent);
 		    boolean isMatch = matcher.find();		    
-			System.out.println(isMatch);
+			System.out.println(matchContent+" is " + isMatch);
 			return isMatch;
 		}
 }

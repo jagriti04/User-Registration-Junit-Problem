@@ -32,4 +32,14 @@ public class UserRegistrationTest
     	boolean firstName = userRegister.validateName("qwer");
         Assert.assertEquals(false, firstName);
     } 
+    @Test
+    public void lastName_whenValid_returnValid() {
+    	boolean lastName = userRegister.validateName("Agni");
+        Assert.assertEquals(true, lastName);
+    } 
+    @Test
+    public void lastName_whenInValid_returnInValid() {
+    	boolean lastName = userRegister.validateName("one");
+        Assert.assertEquals(false, lastName);
+    } 
 }
