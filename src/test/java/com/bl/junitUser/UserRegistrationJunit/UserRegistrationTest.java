@@ -59,5 +59,22 @@ public class UserRegistrationTest
         Assert.assertEquals(false, email);
     } 
  
+// test cases for validating phone numbers
+    @Test
+    public void phoneNo_whenValid_returnValid() {
+    	boolean phoneCheck = userRegister.validateMobile("91 1234521361");
+    	Assert.assertEquals(true, phoneCheck);
+    }
+    @Test
+    public void phoneNo_whenNoSpace_returnValid() {
+    	boolean phoneCheck = userRegister.validateMobile("911234521361");
+    	Assert.assertEquals(false, phoneCheck);
+    }
+    @Test
+    public void phoneNo_whenDigitsNotCorrect_returnValid() {
+    	boolean phoneCheck = userRegister.validateMobile("9234521361");
+    	Assert.assertEquals(false, phoneCheck);
+    }
     
+ 
 }

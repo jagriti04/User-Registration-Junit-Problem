@@ -22,6 +22,12 @@ public class UserValidation {
 			return emailMatches;
 		}
 		
+		public boolean validateMobile(String mobileNum) {
+			String patternString = "^([0-9]{2})[\\s]([0-9]{10})";
+			boolean phoneMatches = regexMatch(mobileNum, patternString);
+			return phoneMatches;
+		}
+		
 		public static boolean regexMatch(String matchContent, String patternString) {  	
 			Pattern pattern = Pattern.compile(patternString);
 		    Matcher matcher = pattern.matcher(matchContent);
