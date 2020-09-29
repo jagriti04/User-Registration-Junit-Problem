@@ -22,4 +22,14 @@ public class UserRegistrationTest
         boolean welcome = userRegister.printWelcome();
         Assert.assertEquals(true, welcome);
     }
+    @Test
+    public void firstName_whenValid_returnValid() {
+    	boolean firstName = userRegister.validateName("Jagriti");
+        Assert.assertEquals(true, firstName);
+    }
+    @Test
+    public void firstName_whenInValid_returnInValid() {
+    	boolean firstName = userRegister.validateName("qwer");
+        Assert.assertEquals(false, firstName);
+    } 
 }
