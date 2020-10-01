@@ -43,7 +43,13 @@ public class ValidEmailTest {
 	@Test
 	public void email_shouldReturnValidInvalid() {
 		System.out.println("Is the email valid: " + isEmailValid);
-		Assert.assertEquals(isEmailValid, userRegister.validateEmail(email));
+		try {
+			Assert.assertEquals(isEmailValid, userRegister.validateEmail(email));
+		} catch (UserValidationExceptions e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage() + " " + e.exceptionType);
+			Assert.assertEquals(UserValidationExceptions.ExceptionType.EMAIL_INVALID, e.exceptionType);
+		}
 	}
 	
 }
