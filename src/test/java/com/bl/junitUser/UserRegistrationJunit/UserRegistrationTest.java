@@ -1,10 +1,10 @@
 package com.bl.junitUser.UserRegistrationJunit;
 
 import static org.junit.Assert.assertTrue;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 
 
 public class UserRegistrationTest 
@@ -26,85 +26,166 @@ public class UserRegistrationTest
 //    test cases for validating first name
     @Test
     public void firstName_whenValid_returnValid() {
-    	boolean firstName = userRegister.validateName("Jagriti");
-        Assert.assertEquals(true, firstName);
+    	boolean firstName;
+		try {
+			firstName = userRegister.validateName("Jagriti");
+			 Assert.assertEquals(true, firstName);
+		} catch (UserValidationExceptions e) {
+			System.out.println(e.exceptionType);
+		}
     }
+    
     @Test
     public void firstName_whenInValid_returnInValid() {
-    	boolean firstName = userRegister.validateName("qwer");
-        Assert.assertEquals(false, firstName);
+    	boolean firstName;
+		try {
+			firstName = userRegister.validateName("qwer");
+		} catch (UserValidationExceptions e) {
+			System.out.println(e.getMessage() + " " + e.exceptionType);
+			Assert.assertEquals(UserValidationExceptions.ExceptionType.NAME_INVALID, e.exceptionType);
+		}
     } 
     
 //  test cases for validating last name
     @Test
     public void lastName_whenValid_returnValid() {
-    	boolean lastName = userRegister.validateName("Agni");
-        Assert.assertEquals(true, lastName);
+    	boolean lastName;
+		try {
+			lastName = userRegister.validateName("Agni");
+			 Assert.assertEquals(true, lastName);
+		} catch (UserValidationExceptions e) {
+			System.out.println(e.exceptionType);
+		}
     } 
+    
     @Test
     public void lastName_whenInValid_returnInValid() {
-    	boolean lastName = userRegister.validateName("one");
-        Assert.assertEquals(false, lastName);
+    	boolean lastName;
+		try {
+			lastName = userRegister.validateName("qwerty");
+		} catch (UserValidationExceptions e) {
+			System.out.println(e.getMessage() + " " + e.exceptionType);
+			Assert.assertEquals(UserValidationExceptions.ExceptionType.NAME_INVALID, e.exceptionType);
+		}
     } 
     
 // test cases for validating emails
     @Test
     public void email_whenValid_returnValid() {
-    	boolean email = userRegister.validateEmail("abc.xyz@bl.co.in");
-        Assert.assertEquals(true, email);
+    	boolean email;
+		try {
+			email = userRegister.validateEmail("abc.xyz@bl.co.in");
+	        Assert.assertEquals(true, email);
+		} catch (UserValidationExceptions e) {
+			System.out.println(e.getMessage() + " " + e.exceptionType);
+		}
     } 
+    
     @Test
     public void email_whenInValid_returnInValid() {
-    	boolean email = userRegister.validateEmail("abcbl.co.in");
-        Assert.assertEquals(false, email);
+    	boolean email;
+		try {
+			email = userRegister.validateEmail("abcbl.co.in");
+		} catch (UserValidationExceptions e) {
+			System.out.println(e.getMessage() + " " + e.exceptionType);
+			Assert.assertEquals(UserValidationExceptions.ExceptionType.EMAIL_INVALID, e.exceptionType);
+		}
     } 
  
 // test cases for validating phone numbers
     @Test
     public void phoneNo_whenValid_returnValid() {
-    	boolean phoneCheck = userRegister.validateMobile("91 1234521361");
-    	Assert.assertEquals(true, phoneCheck);
+    	boolean phoneCheck;
+		try {
+			phoneCheck = userRegister.validateMobile("91 1234521361");
+			Assert.assertEquals(true, phoneCheck);
+		} catch (UserValidationExceptions e) {
+			System.out.println(e.getMessage() + " " + e.exceptionType);
+		}
+    }
+    
+    @Test
+    public void phoneNo_whenNoSpace_returnInValid() {
+    	boolean phoneCheck;
+		try {
+			phoneCheck = userRegister.validateMobile("911234521361");
+		} catch (UserValidationExceptions e) {
+			System.out.println(e.getMessage() + " " + e.exceptionType);
+			Assert.assertEquals(UserValidationExceptions.ExceptionType.PHONE_NUM_INVALID, e.exceptionType);
+		}
+    	
     }
     @Test
-    public void phoneNo_whenNoSpace_returnValid() {
-    	boolean phoneCheck = userRegister.validateMobile("911234521361");
-    	Assert.assertEquals(false, phoneCheck);
-    }
-    @Test
-    public void phoneNo_whenDigitsNotCorrect_returnValid() {
-    	boolean phoneCheck = userRegister.validateMobile("9234521361");
-    	Assert.assertEquals(false, phoneCheck);
+    public void phoneNo_whenDigitsNotCorrect_returnInValid() {
+    	boolean phoneCheck;
+		try {
+			phoneCheck = userRegister.validateMobile("9234521361");
+		} catch (UserValidationExceptions e) {
+			System.out.println(e.getMessage() + " " + e.exceptionType);
+			Assert.assertEquals(UserValidationExceptions.ExceptionType.PHONE_NUM_INVALID, e.exceptionType);
+		}
     }
     
  // test cases to check if password is valid (more than 8 char and atleast one upper case)
     @Test
     public void password_whenLengthEightAUpperCaseANumber_returnValid() {
-    	boolean passCheck = userRegister.validatePhoneRule1("Hello@123Hi");
-    	Assert.assertEquals(true, passCheck);
+    	boolean passCheck;
+		try {
+			passCheck = userRegister.validatePassword("Hello@123Hi");
+	    	Assert.assertEquals(true, passCheck);
+		} catch (UserValidationExceptions e) {
+			System.out.println(e.getMessage() + " " + e.exceptionType);
+		}
     }
+    
     @Test
     public void password_whenNoUpperCase_returnInValid() {
-    	boolean passCheck = userRegister.validatePhoneRule1("789*uigh");
-    	Assert.assertEquals(false, passCheck);
+    	boolean passCheck;
+		try {
+			passCheck = userRegister.validatePassword("789*uigh");
+		} catch (UserValidationExceptions e) {
+			System.out.println(e.getMessage() + " " + e.exceptionType);
+			Assert.assertEquals(UserValidationExceptions.ExceptionType.PASSWORD_INVALID, e.exceptionType);
+		}
     }
     @Test
     public void password_whenLengthMoreThanEightNoUpperCase_returnInValid() {
-    	boolean passCheck = userRegister.validatePhoneRule1("abc#$79*uigh");
-    	Assert.assertEquals(false, passCheck);
+    	boolean passCheck;
+		try {
+			passCheck = userRegister.validatePassword("abc#$79*uigh");
+		} catch (UserValidationExceptions e) {
+			System.out.println(e.getMessage() + " " + e.exceptionType);
+			Assert.assertEquals(UserValidationExceptions.ExceptionType.PASSWORD_INVALID, e.exceptionType);
+		}
     }
     @Test
     public void password_whenLengthLessThanEight_returnInValid() {
-    	boolean passCheck = userRegister.validatePhoneRule1("abc#$");
-    	Assert.assertEquals(false, passCheck);
+    	boolean passCheck;
+		try {
+			passCheck = userRegister.validatePassword("abc#$");
+		} catch (UserValidationExceptions e) {
+			System.out.println(e.getMessage() + " " + e.exceptionType);
+			Assert.assertEquals(UserValidationExceptions.ExceptionType.PASSWORD_INVALID, e.exceptionType);
+		}
     }
     @Test
     public void password_whenNoNumber_returnInValid() {
-    	boolean passCheck = userRegister.validatePhoneRule1("Hello@hii");
-    	Assert.assertEquals(false, passCheck);
+    	boolean passCheck;
+		try {
+			passCheck = userRegister.validatePassword("Hello@hii");
+		} catch (UserValidationExceptions e) {
+			System.out.println(e.getMessage() + " " + e.exceptionType);
+			Assert.assertEquals(UserValidationExceptions.ExceptionType.PASSWORD_INVALID, e.exceptionType);
+		}
     }
     @Test
     public void password_whenNoSpecialChar_returnInValid() {
-    	boolean passCheck = userRegister.validatePhoneRule1("Hello123hii");
-    	Assert.assertEquals(false, passCheck);
+    	boolean passCheck;
+		try {
+			passCheck = userRegister.validatePassword("Hello123hii");
+		} catch (UserValidationExceptions e) {
+			System.out.println(e.getMessage() + " " + e.exceptionType);
+			Assert.assertEquals(UserValidationExceptions.ExceptionType.PASSWORD_INVALID, e.exceptionType);
+		}
     }
 }
