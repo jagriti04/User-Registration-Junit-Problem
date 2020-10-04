@@ -4,6 +4,11 @@ import java.util.regex.Matcher;
 
 import java.util.regex.Pattern;
 
+@FunctionalInterface
+interface PatternValidationFunction {
+	 public boolean regexMatch(String matchContent, String patternString);
+}
+
 public class UserValidation {
 	
 		public boolean printWelcome() {
@@ -15,7 +20,7 @@ public class UserValidation {
 		public boolean validateName(String name) throws UserValidationExceptions {
 			
 			String patternString = "(^[A-Z])[A-Za-z]{2,}$";
-			boolean matches = regexMatch(name, patternString);
+			boolean matches = regexMatchFun.regexMatch(name, patternString);
 			
 			if (matches == false) {
 				throw new UserValidationExceptions(UserValidationExceptions.ExceptionType.NAME_INVALID, "Enter proper name");
@@ -25,7 +30,7 @@ public class UserValidation {
 		
 		public boolean validateEmail(String email) throws UserValidationExceptions {
 			String patternString = "^[a-zA-z]{1}([.]{0,1}[a-zA-z0-9+-]{1,}){0,}[@]{1}[a-zA-Z0-9]{1,}[.]{1}[a-z]{2,3}([.]{1}[a-z]{2}){0,1}$";
-			boolean emailMatches = regexMatch(email, patternString);
+			boolean emailMatches = regexMatchFun.regexMatch(email, patternString);
 			if (emailMatches == false) {
 				throw new UserValidationExceptions(UserValidationExceptions.ExceptionType.EMAIL_INVALID, "Enter proper email");
 			} 
@@ -34,7 +39,7 @@ public class UserValidation {
 		
 		public boolean validateMobile(String mobileNum) throws UserValidationExceptions {
 			String patternString = "^([0-9]{2})[\\s]([0-9]{10})";
-			boolean phoneMatches = regexMatch(mobileNum, patternString);
+			boolean phoneMatches = regexMatchFun.regexMatch(mobileNum, patternString);
 			if (phoneMatches == false) {
 				throw new UserValidationExceptions(UserValidationExceptions.ExceptionType.PHONE_NUM_INVALID, "Enter proper phone no.");
 			} 
@@ -43,18 +48,18 @@ public class UserValidation {
 
 		public boolean validatePassword(String password) throws UserValidationExceptions {
 			String patternString = "^(?=.*\\d)(?=[^!@#$%^&*()_+=]*[!@#$%^&*()_+=][^!@#$%^&*()_+=]*$)(?=.*[A-Z]).{8,}$";
-			boolean passMatches = regexMatch(password, patternString);
+			boolean passMatches = regexMatchFun.regexMatch(password, patternString);
 			if (passMatches == false) {
 				throw new UserValidationExceptions(UserValidationExceptions.ExceptionType.PASSWORD_INVALID, "Enter proper password");
 			} 
 			return passMatches;
 		}
 		
-		public static boolean regexMatch(String matchContent, String patternString) {  	
+		PatternValidationFunction regexMatchFun = (String matchContent, String patternString) -> {  	
 			Pattern pattern = Pattern.compile(patternString);
 		    Matcher matcher = pattern.matcher(matchContent);
 		    boolean isMatch = matcher.find();		   
 			return isMatch;
-		}
+		};
 
 }
